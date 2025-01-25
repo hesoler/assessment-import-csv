@@ -1,0 +1,56 @@
+<div class="modal">
+  <div class="modal-header">
+    <h2 mat-dialog-title>Bulk Award Badge</h2>
+    <a href="#" target="_blank">Learn More ↪ </a>
+  </div>
+
+  <mat-dialog-content>
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+      <mat-icon class="close-icon" color="warn">&times;</mat-icon>
+    </button>
+
+    <mat-horizontal-stepper [linear]="!isFileUploaded" #stepper>
+
+      <mat-step [stepControl]="firstFormGroup" label="Upload File">
+        <form [formGroup]="firstFormGroup">
+          <app-dropzone-table (fileUploaded)="handleFileUploaded($event)"/>
+          <footer>
+            <button class="footer-button" mat-button matStepperNext [disabled]="!isFileUploaded">Next</button>
+          </footer>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="secondFormGroup" label="Field Mapping">
+        <form [formGroup]="secondFormGroup">
+          <h3 mat-subheader>Field Mapping</h3>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="thirdFormGroup" label="Validation">
+        <form [formGroup]="thirdFormGroup">
+          <h3 mat-subheader>Validation</h3>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="onSave()">Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="fourthFormGroup" label="Summary">
+        <form [formGroup]="fourthFormGroup">
+          <h3 mat-subheader>Summary</h3>
+          <div mat-dialog-actions>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button (click)="onSave()">Ready to send</button>
+          </div>
+        </form>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+  </mat-dialog-content>
+</div>

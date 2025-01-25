@@ -1,0 +1,32 @@
+<h3 mat-subheader>Upload File</h3>
+<p>The file should be formatted as <b>coma separated value (.csv)</b> and uncode <b>UTF-8</b> if possible.</p>
+
+<ngx-dropzone (change)="onSelect($event)" accept=".csv">
+  <ngx-dropzone-label>
+    Drag & Drop File or Select File to Upload
+  </ngx-dropzone-label>
+</ngx-dropzone>
+
+<div *ngIf="file" class="remove-file">
+  <p>Uploaded file: {{ file.name }}</p>
+  <button type="button" (click)="onRemove()" [disabled]="isButtonDisabled">Remove file</button>
+</div>
+
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="dataSource.data.length > 0">
+  <h3 mat-subheader>File preview</h3>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef> {{ column }}</th>
+      <td mat-cell *matCellDef="let element"> {{ element[column] }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

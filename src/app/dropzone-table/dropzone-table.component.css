@@ -1,0 +1,16 @@
+.remove-file {
+  display: ruby;
+}
+
+.remove-file>p {
+  margin-inline-end: 20px;
+}
+.remove-file>button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}

@@ -1,0 +1,27 @@
+.modal {
+  height: 40em;
+}
+
+.modal-header > a {
+  margin-left: 25px;
+}
+
+.close-button {
+  top: 5px;
+  right: 10px;
+  font-size: 32px;
+  position: absolute;
+  line-height: 14px;
+  min-width: auto;
+}
+
+.panel {
+  box-sizing: border-box;
+  border: 2px solid #000;
+}
+
+footer-button {
+  background-color: #000;
+  position: absolute;
+  bottom: 0;
+}
