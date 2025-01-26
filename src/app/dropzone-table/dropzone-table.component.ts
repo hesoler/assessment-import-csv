@@ -11,6 +11,10 @@ import {NgForOf, NgIf} from '@angular/common';
 import * as Papa from 'papaparse';
 import {MatListSubheaderCssMatStyler} from '@angular/material/list';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import {FileSelectResult} from 'ngx-dropzone/lib/ngx-dropzone.service';
+
 @Component({
   selector: 'app-dropzone-table',
   templateUrl: './dropzone-table.component.html',
@@ -35,14 +39,13 @@ import {MatListSubheaderCssMatStyler} from '@angular/material/list';
 export class DropzoneTableComponent {
   file: File | null = null;
   isButtonDisabled = true;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<unknown>();
   displayedColumns: string[] = [];
   errorMessage = '';
   resultMessage = '';
   @Output() fileUploaded = new EventEmitter<boolean>();
 
-  onSelect(event: any) {
-    console.log(event);
+  onSelect(event: FileSelectResult) {
     const selectedFile = event?.addedFiles[0];
     if (selectedFile?.type === 'text/csv') {
       this.file = selectedFile;
