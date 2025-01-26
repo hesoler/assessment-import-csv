@@ -38,6 +38,7 @@ export class DropzoneTableComponent {
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = [];
   errorMessage = '';
+  resultMessage = '';
   @Output() fileUploaded = new EventEmitter<boolean>();
 
   onSelect(event: any) {
@@ -51,6 +52,7 @@ export class DropzoneTableComponent {
     } else {
       this.onRemove()
       this.errorMessage = 'Only .csv files are allowed!';
+      this.resultMessage = '';
     }
   }
 
@@ -60,6 +62,7 @@ export class DropzoneTableComponent {
     this.dataSource.data = [];
     this.displayedColumns = [];
     this.errorMessage = '';
+    this.resultMessage = '';
     this.fileUploaded.emit(false);
   }
 
@@ -70,6 +73,8 @@ export class DropzoneTableComponent {
         this.dataSource.data = result.data;
         this.displayedColumns = result.meta.fields || [];
         this.fileUploaded.emit(true);
+        const rows = result.data.length || 0;
+        this.resultMessage = `Showing all ${rows} Row(s)`;
       },
       error: (error) => {
         this.errorMessage = 'Error parsing CSV file!';

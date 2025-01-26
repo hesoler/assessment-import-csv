@@ -19,7 +19,7 @@
 <div *ngIf="dataSource.data.length > 0">
   <h3 mat-subheader>File preview</h3>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" border="1">
 
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef> {{ column }}</th>
@@ -29,4 +29,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <p>{{ resultMessage }}</p>
 </div>
