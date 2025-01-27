@@ -1,13 +1,13 @@
-import {CommonModule} from '@angular/common';
-import {Component, inject} from '@angular/core';
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatButtonModule, MatIconButton} from '@angular/material/button';
-import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {MatIcon, MatIconModule} from '@angular/material/icon';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatListSubheaderCssMatStyler} from '@angular/material/list';
-import {DropzoneTableComponent} from '../dropzone-table/dropzone-table.component';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { CommonModule } from '@angular/common'
+import { Component, inject } from '@angular/core'
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { MatButtonModule, MatIconButton } from '@angular/material/button'
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog'
+import { MatIcon, MatIconModule } from '@angular/material/icon'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatListSubheaderCssMatStyler } from '@angular/material/list'
+import { DropzoneTableComponent } from '../dropzone-table/dropzone-table.component'
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 
 @Component({
   selector: 'app-modal',
@@ -22,48 +22,51 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
     ReactiveFormsModule,
     CommonModule,
     MatListSubheaderCssMatStyler,
-    DropzoneTableComponent,
+    DropzoneTableComponent
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: {displayDefaultIndicatorType: false},
+      useValue: { displayDefaultIndicatorType: false }
     }
   ]
 })
 export class ModalComponent {
-  isFileUploaded = false;
+  isFileUploaded = false
 
-  private _formBuilder = inject(FormBuilder);
+  private readonly _formBuilder = inject(FormBuilder)
 
   firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
+    firstCtrl: ['', Validators.required]
+  })
+
   secondFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
+    firstCtrl: ['', Validators.required]
+  })
+
   thirdFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
+    firstCtrl: ['', Validators.required]
+  })
+
   fourthFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
+    firstCtrl: ['', Validators.required]
+  })
 
-  constructor(
-    private dialogRef: MatDialogRef<ModalComponent>) {
+  constructor (
+    private readonly dialogRef: MatDialogRef<ModalComponent>) {
   }
 
-  handleFileUploaded(event: boolean) {
-    this.isFileUploaded = event;
+  handleFileUploaded (event: boolean) {
+    this.isFileUploaded = event
   }
 
-  onCancel(): void {
-    this.dialogRef.close();
+  onCancel (): void {
+    this.dialogRef.close()
   }
 
-  onSave(): void {
-    this.dialogRef.close(true);
+  onSave (): void {
+    this.dialogRef.close(true)
   }
 }

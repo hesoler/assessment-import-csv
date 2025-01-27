@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {NgxDropzoneModule} from 'ngx-dropzone';
-import {NgForOf, NgIf} from '@angular/common';
-import * as Papa from 'papaparse';
-import {MatListSubheaderCssMatStyler} from '@angular/material/list';
+import { Component, EventEmitter, Output } from '@angular/core'
+import { NgxDropzoneModule } from 'ngx-dropzone'
+import { NgForOf, NgIf } from '@angular/common'
+import * as Papa from 'papaparse'
+import { MatListSubheaderCssMatStyler } from '@angular/material/list'
 
-// @ts-ignore
-import {FileSelectResult} from 'ngx-dropzone/lib/ngx-dropzone.service';
+// @ts-expect-error
+import { FileSelectResult } from 'ngx-dropzone/lib/ngx-dropzone.service'
 
 @Component({
   selector: 'app-dropzone-table',
@@ -19,51 +19,51 @@ import {FileSelectResult} from 'ngx-dropzone/lib/ngx-dropzone.service';
   styleUrls: ['./dropzone-table.component.css']
 })
 export class DropzoneTableComponent {
-  file: File | null = null;
-  isButtonDisabled = true;
-  data: never[] = [];
-  errorMessage = '';
-  resultMessage = '';
-  @Output() fileUploaded = new EventEmitter<boolean>();
+  file: File | null = null
+  isButtonDisabled = true
+  data: never[] = []
+  errorMessage = ''
+  resultMessage = ''
+  @Output() fileUploaded = new EventEmitter<boolean>()
 
-  onSelect(event: FileSelectResult) {
-    const selectedFile = event?.addedFiles[0];
+  onSelect (event: FileSelectResult) {
+    const selectedFile = event?.addedFiles[0]
     if (selectedFile?.type === 'text/csv') {
-      this.file = selectedFile;
-      this.isButtonDisabled = false;
-      this.errorMessage = '';
-      this.parseCSV(selectedFile);
+      this.file = selectedFile
+      this.isButtonDisabled = false
+      this.errorMessage = ''
+      this.parseCSV(selectedFile)
     } else {
       this.onRemove()
-      this.errorMessage = 'Only .csv files are allowed!';
-      this.resultMessage = '';
+      this.errorMessage = 'Only .csv files are allowed!'
+      this.resultMessage = ''
     }
   }
 
-  onRemove() {
-    this.file = null;
-    this.isButtonDisabled = true;
-    this.data = [];
-    this.errorMessage = '';
-    this.resultMessage = '';
-    this.fileUploaded.emit(false);
+  onRemove () {
+    this.file = null
+    this.isButtonDisabled = true
+    this.data = []
+    this.errorMessage = ''
+    this.resultMessage = ''
+    this.fileUploaded.emit(false)
   }
 
-  parseCSV(file: File) {
+  parseCSV (file: File) {
     Papa.parse(file, {
       header: false,
       complete: (result) => {
-        const rows = result.data.length - 1;
+        const rows = result.data.length - 1
         // @ts-expect-error
-        this.data = result.data.slice(0, rows);
-        this.fileUploaded.emit(true);
-        this.resultMessage = `Showing all ${rows} Row(s)`;
+        this.data = result.data.slice(0, rows)
+        this.fileUploaded.emit(true)
+        this.resultMessage = `Showing all ${rows} Row(s)`
       },
       error: (error) => {
-        this.errorMessage = 'Error parsing CSV file!';
-        this.fileUploaded.emit(false);
-        console.error('Error parsing CSV file:', error);
+        this.errorMessage = 'Error parsing CSV file!'
+        this.fileUploaded.emit(false)
+        console.error('Error parsing CSV file:', error)
       }
-    });
+    })
   }
 }
