@@ -11,7 +11,7 @@
 
     <mat-horizontal-stepper [linear]="!isFileUploaded" #stepper>
 
-      <mat-step [stepControl]="firstFormGroup" label="Upload File">
+      <mat-step [stepControl]="firstFormGroup" label="Upload File" state="done">
         <form [formGroup]="firstFormGroup">
           <app-dropzone-table (fileUploaded)="handleFileUploaded($event)"/>
           <footer>
@@ -20,7 +20,7 @@
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="secondFormGroup" label="Field Mapping">
+      <mat-step [stepControl]="secondFormGroup" label="Field Mapping" state="number">
         <form [formGroup]="secondFormGroup">
           <h3 mat-subheader>Field Mapping</h3>
           <div>
@@ -30,7 +30,7 @@
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="thirdFormGroup" label="Validation">
+      <mat-step [stepControl]="thirdFormGroup" label="Validation" state="number">
         <form [formGroup]="thirdFormGroup">
           <h3 mat-subheader>Validation</h3>
           <div>
@@ -40,7 +40,7 @@
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="fourthFormGroup" label="Summary">
+      <mat-step [stepControl]="fourthFormGroup" label="Summary" state="number">
         <form [formGroup]="fourthFormGroup">
           <h3 mat-subheader>Summary</h3>
           <div mat-dialog-actions>

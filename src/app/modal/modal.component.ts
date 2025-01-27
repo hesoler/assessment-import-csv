@@ -1,12 +1,13 @@
 import {CommonModule} from '@angular/common';
-import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Component, inject} from '@angular/core';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButtonModule, MatIconButton} from '@angular/material/button';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {MatIcon} from '@angular/material/icon';
+import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatListSubheaderCssMatStyler} from '@angular/material/list';
 import {DropzoneTableComponent} from '../dropzone-table/dropzone-table.component';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-modal',
@@ -16,6 +17,7 @@ import {DropzoneTableComponent} from '../dropzone-table/dropzone-table.component
     MatButtonModule,
     MatIconButton,
     MatIcon,
+    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
@@ -24,31 +26,33 @@ import {DropzoneTableComponent} from '../dropzone-table/dropzone-table.component
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {displayDefaultIndicatorType: false},
+    }
+  ]
 })
 export class ModalComponent {
   isFileUploaded = false;
 
-  firstFormGroup: FormGroup
-  secondFormGroup: FormGroup
-  thirdFormGroup: FormGroup
-  fourthFormGroup: FormGroup
+  private _formBuilder = inject(FormBuilder);
+
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  thirdFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  fourthFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
 
   constructor(
-    private dialogRef: MatDialogRef<ModalComponent>,
-    private _formBuilder: FormBuilder
-  ) {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: new FormControl(null, [Validators.required]),
-    })
-    this.secondFormGroup = this._formBuilder.group({
-      firstCtrl: new FormControl(null, [Validators.required]),
-    })
-    this.thirdFormGroup = this._formBuilder.group({
-      firstCtrl: new FormControl(null, [Validators.required]),
-    })
-    this.fourthFormGroup = this._formBuilder.group({
-      firstCtrl: new FormControl(null, [Validators.required]),
-    })
+    private dialogRef: MatDialogRef<ModalComponent>) {
   }
 
   handleFileUploaded(event: boolean) {
