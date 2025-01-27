@@ -2,13 +2,15 @@
   display: ruby;
 }
 
-.remove-file>p {
+.remove-file > p {
   margin-inline-end: 20px;
 }
-.remove-file>button:hover {
+
+.remove-file > button:hover {
   cursor: pointer;
 }
-.remove-file>button:disabled {
+
+.remove-file > button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -16,4 +18,16 @@
 .error-message {
   color: red;
   margin-top: 10px;
+}
+
+.csv-results {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.csv-results td {
+  border: 2px solid #ddd;
+  vertical-align: middle;
+  padding: 15px;
 }

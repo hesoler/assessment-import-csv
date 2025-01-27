@@ -1,7 +1,3 @@
-.modal {
-  height: 40em;
-}
-
 .modal-header > a {
   margin-left: 25px;
 }
@@ -13,11 +9,6 @@
   position: absolute;
   line-height: 14px;
   min-width: auto;
-}
-
-.panel {
-  box-sizing: border-box;
-  border: 2px solid #000;
 }
 
 footer-button {

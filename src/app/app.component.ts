@@ -20,7 +20,7 @@ export class AppComponent {
 
   openModal(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      maxWidth: '80em', width: '80em', height: '85vh', panelClass: 'panel'
+      maxWidth: '100em', width: '100em', height: '90vh'
     });
 
     dialogRef.afterClosed().subscribe(result => {
