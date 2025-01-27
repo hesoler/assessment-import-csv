@@ -4,8 +4,7 @@ import {NgForOf, NgIf} from '@angular/common';
 import * as Papa from 'papaparse';
 import {MatListSubheaderCssMatStyler} from '@angular/material/list';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
+// @ts-ignore
 import {FileSelectResult} from 'ngx-dropzone/lib/ngx-dropzone.service';
 
 @Component({
@@ -22,7 +21,7 @@ import {FileSelectResult} from 'ngx-dropzone/lib/ngx-dropzone.service';
 export class DropzoneTableComponent {
   file: File | null = null;
   isButtonDisabled = true;
-  data: any[] = [];
+  data: never[] = [];
   errorMessage = '';
   resultMessage = '';
   @Output() fileUploaded = new EventEmitter<boolean>();
@@ -55,6 +54,7 @@ export class DropzoneTableComponent {
       header: false,
       complete: (result) => {
         const rows = result.data.length - 1;
+        // @ts-expect-error
         this.data = result.data.slice(0, rows);
         this.fileUploaded.emit(true);
         this.resultMessage = `Showing all ${rows} Row(s)`;
