@@ -19,15 +19,3 @@
   color: red;
   margin-top: 10px;
 }
-
-.csv-results {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-}
-
-.csv-results td {
-  border: 2px solid #ddd;
-  vertical-align: middle;
-  padding: 15px;
-}
