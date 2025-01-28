@@ -25,9 +25,9 @@ export class AppComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('El modal se cerró')
+        console.log('Modal was closed')
       } else {
-        console.log('Los cambios han sido cancelados')
+        console.log('Changes are been cancelled')
       }
     })
   }
