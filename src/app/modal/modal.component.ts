@@ -35,6 +35,9 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 })
 export class ModalComponent {
   isFileUploaded = false
+  csvData: any[] = []
+  headers: string[] = []
+  ourColumnHeaders = ['Identifier', 'First Name', 'Last Name', 'Narrative', 'Evidence Narrative', 'Evidence URL', 'Issue Date', 'Expiration Date']
 
   private readonly _formBuilder = inject(FormBuilder)
 
@@ -60,6 +63,12 @@ export class ModalComponent {
 
   handleFileUploaded (event: boolean) {
     this.isFileUploaded = event
+  }
+
+  handleCSVData (data: any[]) {
+    this.csvData = data
+    console.log(data)
+    this.headers = data.length > 0 ? Object.values(data[0]) : []
   }
 
   onCancel (): void {

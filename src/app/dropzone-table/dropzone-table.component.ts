@@ -19,12 +19,13 @@ import { FileSelectResult } from 'ngx-dropzone/lib/ngx-dropzone.service'
   styleUrls: ['./dropzone-table.component.css']
 })
 export class DropzoneTableComponent {
-  file: File | null = null
+  protected file: File | null = null
   isButtonDisabled = true
   data: never[] = []
   errorMessage = ''
   resultMessage = ''
   @Output() fileUploaded = new EventEmitter<boolean>()
+  @Output() csvData = new EventEmitter<any[]>()
 
   onSelect (event: FileSelectResult) {
     const selectedFile = event?.addedFiles[0]
@@ -47,6 +48,7 @@ export class DropzoneTableComponent {
     this.errorMessage = ''
     this.resultMessage = ''
     this.fileUploaded.emit(false)
+    this.csvData.emit([])
   }
 
   parseCSV (file: File) {
@@ -54,9 +56,11 @@ export class DropzoneTableComponent {
       header: false,
       complete: (result) => {
         const rows = result.data.length - 1
+        const data = result.data.slice(0, rows)
         // @ts-expect-error
-        this.data = result.data.slice(0, rows)
+        this.data = data
         this.fileUploaded.emit(true)
+        this.csvData.emit(data)
         this.resultMessage = `Showing all ${rows} Row(s)`
       },
       error: (error) => {
