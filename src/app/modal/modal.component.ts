@@ -40,6 +40,7 @@ export class ModalComponent {
   csvData: any[] = []
   headers: string[] = []
   ourColumnHeaders = ['Identifier', 'First Name', 'Last Name', 'Narrative', 'Evidence Narrative', 'Evidence URL', 'Issue Date', 'Expiration Date']
+  allSelectsValid = false
 
   protected readonly _formBuilder = inject(FormBuilder)
 
@@ -67,6 +68,10 @@ export class ModalComponent {
     this.isFileUploaded = data.length > 0
     this.csvData = data
     this.headers = data.length > 0 ? Object.values(data[0]) : []
+  }
+
+  handleValidSelects (valid: boolean) {
+    this.allSelectsValid = valid
   }
 
   onSave (): void {

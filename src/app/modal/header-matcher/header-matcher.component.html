@@ -1,4 +1,4 @@
-<div *ngIf="headers.length > 0">
+<form [formGroup]="form">
   <label>
     <input type="checkbox">
     First row has headers
@@ -11,9 +11,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let ourHeader of ourColumnHeaders">
+    <tr *ngFor="let ourHeader of ourColumnHeaders; let i = index">
       <td>
-        <select class="csv-headers">
+        <select class="csv-headers" [formControlName]="'select' + i">
           <option value="-1" disabled selected>Select Column...</option>
           <option class="csv-header" *ngFor="let header of headers" [value]="header">{{ header }}</option>
         </select>
@@ -22,4 +22,4 @@
     </tr>
     </tbody>
   </table>
-</div>
+</form>

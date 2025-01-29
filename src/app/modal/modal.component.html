@@ -9,7 +9,7 @@
 
   <mat-horizontal-stepper [linear]="!isFileUploaded" #stepper>
 
-    <mat-step [stepControl]="firstFormGroup" label="Upload File" state="done">
+    <mat-step [stepControl]="firstFormGroup" label="Upload File" [completed]="isFileUploaded">
       <form [formGroup]="firstFormGroup">
         <app-dropzone-table (csvData)="handleCSVData($event)"/>
         <footer class="footer-buttons">
@@ -18,13 +18,17 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup" label="Field Mapping" state="number">
+    <mat-step [stepControl]="secondFormGroup" label="Field Mapping" [completed]="allSelectsValid">
       <form class="second-form" [formGroup]="secondFormGroup">
-        <app-header-matcher [headers]="headers" [ourColumnHeaders]="ourColumnHeaders"/>
+        <div *ngIf="headers.length > 0">
+          <app-header-matcher [headers]="headers"
+                              [ourColumnHeaders]="ourColumnHeaders"
+                              (validSelect)="handleValidSelects($event)"/>
+        </div>
 
         <footer class="footer-buttons">
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext [disabled]="!allSelectsValid">Next</button>
         </footer>
       </form>
     </mat-step>
