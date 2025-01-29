@@ -35,7 +35,7 @@
             <tbody>
             <tr *ngFor="let ourHeader of ourColumnHeaders">
               <td>
-                <select class="csv-headers">
+                <select class="csv-headers" formControlName="firstCtrl" required>
                   <option value="" disabled selected>Select Column...</option>
                   <option class="csv-header" *ngFor="let header of headers" [value]="header">{{ header }}</option>
                 </select>

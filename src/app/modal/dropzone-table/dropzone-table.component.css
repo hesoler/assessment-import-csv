@@ -1,9 +1,11 @@
 .remove-file {
-  display: ruby;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .remove-file > p {
-  margin-inline-end: 20px;
+  margin-inline-end: 15px;
 }
 
 .remove-file > button:hover {

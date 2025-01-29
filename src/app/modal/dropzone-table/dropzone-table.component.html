@@ -6,15 +6,17 @@
     Drag & Drop File or Select File to Upload
   </ngx-dropzone-label>
 </ngx-dropzone>
-<p class="download-csv-example">
+<p class="download-csv-example" *ngIf="!file else fileNameRemoveButton">
   No sure how to configure your file?
   <a href="/Example%20Bulk%20Badge%20Awards.csv" target="_blank">Download example .CSV</a>
 </p>
 
-<div *ngIf="file" class="remove-file">
-  <p>Uploaded file: {{ file.name }}</p>
-  <button type="button" (click)="onRemove()" [disabled]="isButtonDisabled">Remove file</button>
-</div>
+<ng-template #fileNameRemoveButton>
+  <span class="remove-file">
+    <p>Uploaded file: {{ file?.name }}</p>
+    <button type="button" (click)="onRemove()" [disabled]="isButtonDisabled">Remove file</button>
+  </span>
+</ng-template>
 
 <div *ngIf="errorMessage" class="error-message">
   {{ errorMessage }}

@@ -1,13 +1,13 @@
-import {CommonModule} from '@angular/common'
-import {Component, inject} from '@angular/core'
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms'
-import {MatButtonModule, MatIconButton} from '@angular/material/button'
-import {MatDialogModule, MatDialogRef} from '@angular/material/dialog'
-import {MatIcon, MatIconModule} from '@angular/material/icon'
-import {MatStepperModule} from '@angular/material/stepper'
-import {MatListSubheaderCssMatStyler} from '@angular/material/list'
-import {DropzoneTableComponent} from '../dropzone-table/dropzone-table.component'
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper'
+import { CommonModule } from '@angular/common'
+import { Component, inject } from '@angular/core'
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { MatButtonModule, MatIconButton } from '@angular/material/button'
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog'
+import { MatIcon, MatIconModule } from '@angular/material/icon'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatListSubheaderCssMatStyler } from '@angular/material/list'
+import { DropzoneTableComponent } from './dropzone-table/dropzone-table.component'
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 
 @Component({
   selector: 'app-modal',
