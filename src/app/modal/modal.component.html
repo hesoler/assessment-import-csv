@@ -11,7 +11,7 @@
 
     <mat-step [stepControl]="firstFormGroup" label="Upload File" state="done">
       <form [formGroup]="firstFormGroup">
-        <app-dropzone-table (fileUploaded)="handleFileUploaded($event)" (csvData)="handleCSVData($event)"/>
+        <app-dropzone-table (csvData)="handleCSVData($event)"/>
         <footer class="footer-buttons">
           <button mat-button matStepperNext [disabled]="!isFileUploaded">Next</button>
         </footer>
@@ -22,7 +22,7 @@
       <form class="second-form" [formGroup]="secondFormGroup">
         <div *ngIf="headers.length > 0">
           <label>
-            <input type="checkbox">
+            <input type="checkbox" [checked]="checkboxHasHeader">
             First row has headers
           </label>
           <table class="modal-table field-mapping-headers">

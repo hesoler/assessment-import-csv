@@ -37,6 +37,7 @@ export class ModalComponent {
   isFileUploaded = false
   csvData: any[] = []
   headers: string[] = []
+  checkboxHasHeader = false
   ourColumnHeaders = ['Identifier', 'First Name', 'Last Name', 'Narrative', 'Evidence Narrative', 'Evidence URL', 'Issue Date', 'Expiration Date']
 
   private readonly _formBuilder = inject(FormBuilder)
@@ -61,13 +62,9 @@ export class ModalComponent {
     private readonly dialogRef: MatDialogRef<ModalComponent>) {
   }
 
-  handleFileUploaded (event: boolean) {
-    this.isFileUploaded = event
-  }
-
   handleCSVData (data: any[]) {
+    this.isFileUploaded = data.length > 0
     this.csvData = data
-    console.log(data)
     this.headers = data.length > 0 ? Object.values(data[0]) : []
   }
 

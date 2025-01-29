@@ -24,7 +24,6 @@ export class DropzoneTableComponent {
   data: never[] = []
   errorMessage = ''
   resultMessage = ''
-  @Output() fileUploaded = new EventEmitter<boolean>()
   @Output() csvData = new EventEmitter<any[]>()
 
   onSelect (event: FileSelectResult) {
@@ -47,7 +46,6 @@ export class DropzoneTableComponent {
     this.data = []
     this.errorMessage = ''
     this.resultMessage = ''
-    this.fileUploaded.emit(false)
     this.csvData.emit([])
   }
 
@@ -59,13 +57,12 @@ export class DropzoneTableComponent {
         const data = result.data.slice(0, rows)
         // @ts-expect-error
         this.data = data
-        this.fileUploaded.emit(true)
         this.csvData.emit(data)
         this.resultMessage = `Showing all ${rows} Row(s)`
       },
       error: (error) => {
+        this.csvData.emit([])
         this.errorMessage = 'Error parsing CSV file!'
-        this.fileUploaded.emit(false)
         console.error('Error parsing CSV file:', error)
       }
     })
