@@ -8,6 +8,7 @@ import { MatStepperModule } from '@angular/material/stepper'
 import { MatListSubheaderCssMatStyler } from '@angular/material/list'
 import { DropzoneTableComponent } from './dropzone-table/dropzone-table.component'
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
+import { HeaderMatcherComponent } from './header-matcher/header-matcher.component'
 
 @Component({
   selector: 'app-modal',
@@ -22,7 +23,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
     ReactiveFormsModule,
     CommonModule,
     MatListSubheaderCssMatStyler,
-    DropzoneTableComponent
+    DropzoneTableComponent,
+    HeaderMatcherComponent
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
@@ -39,7 +41,7 @@ export class ModalComponent {
   headers: string[] = []
   ourColumnHeaders = ['Identifier', 'First Name', 'Last Name', 'Narrative', 'Evidence Narrative', 'Evidence URL', 'Issue Date', 'Expiration Date']
 
-  private readonly _formBuilder = inject(FormBuilder)
+  protected readonly _formBuilder = inject(FormBuilder)
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required]

@@ -1,0 +1,25 @@
+<div *ngIf="headers.length > 0">
+  <label>
+    <input type="checkbox">
+    First row has headers
+  </label>
+  <table class="modal-table field-mapping-headers">
+    <thead>
+    <tr>
+      <th>YOUR COLUMNS</th>
+      <th>OUR COLUMN HEADERS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ourHeader of ourColumnHeaders">
+      <td>
+        <select class="csv-headers">
+          <option value="-1" disabled selected>Select Column...</option>
+          <option class="csv-header" *ngFor="let header of headers" [value]="header">{{ header }}</option>
+        </select>
+      </td>
+      <td>{{ ourHeader }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
