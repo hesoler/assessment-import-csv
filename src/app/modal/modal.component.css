@@ -1,5 +1,6 @@
 .modal {
   max-height: 81.5vh;
+  overflow-y: scroll;
 }
 
 .modal-header > a {
