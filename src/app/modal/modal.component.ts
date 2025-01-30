@@ -42,21 +42,21 @@ export class ModalComponent {
   ourColumnHeaders = ['Identifier', 'First Name', 'Last Name', 'Narrative', 'Evidence Narrative', 'Evidence URL', 'Issue Date', 'Expiration Date']
   allSelectsValid = false
 
-  protected readonly _formBuilder = inject(FormBuilder)
+  protected readonly formBuilder = inject(FormBuilder)
 
-  firstFormGroup = this._formBuilder.group({
+  firstFormGroup = this.formBuilder.group({
     firstCtrl: ['', Validators.required]
   })
 
-  secondFormGroup = this._formBuilder.group({
+  secondFormGroup = this.formBuilder.group({
     firstCtrl: ['', Validators.required]
   })
 
-  thirdFormGroup = this._formBuilder.group({
+  thirdFormGroup = this.formBuilder.group({
     firstCtrl: ['', Validators.required]
   })
 
-  fourthFormGroup = this._formBuilder.group({
+  fourthFormGroup = this.formBuilder.group({
     firstCtrl: ['', Validators.required]
   })
 

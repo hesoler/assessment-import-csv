@@ -16,24 +16,22 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 export class HeaderMatcherComponent {
   @Input() headers!: string[]
   @Input() ourColumnHeaders!: string[]
+
+  @Input() formBuilder!: FormBuilder
+  @Input() formGroup!: FormGroup
+
   @Output() validSelect = new EventEmitter<boolean>()
 
-  form: FormGroup
-
-  constructor (private readonly fb: FormBuilder) {
-    this.form = this.fb.group({})
-  }
-
   checkValidSelects () {
-    const allValid = Object.values(this.form.value).every(value => value !== '-1')
+    const allValid = Object.values(this.formGroup.value).every(value => value !== '-1')
     this.validSelect.emit(allValid)
   }
 
   ngOnInit () {
     this.headers.forEach((header, index) => {
-      this.form.addControl(`select${index}`, this.fb.control('-1', Validators.required))
+      this.formGroup.addControl(`select${index}`, this.formBuilder.control('-1', Validators.required))
     })
-    this.form.valueChanges.subscribe(() => {
+    this.formGroup.valueChanges.subscribe(() => {
       this.checkValidSelects()
     })
   }
