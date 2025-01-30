@@ -6,6 +6,7 @@
     Drag & Drop File or Select File to Upload
   </ngx-dropzone-label>
 </ngx-dropzone>
+
 <p class="download-csv-example" *ngIf="!file else fileNameRemoveButton">
   No sure how to configure your file?
   <a href="/Example%20Bulk%20Badge%20Awards.csv" target="_blank">Download example .CSV</a>
@@ -28,7 +29,6 @@
     using "UTF-8" encoding (if available). Manually input data should be comma tab separated.</p>
   <hr/>
   <table class="modal-table">
-    <thead></thead>
     <tbody>
     <tr *ngFor="let row of data">
       <td *ngFor="let cell of row">{{ cell }}</td>
