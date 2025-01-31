@@ -1,16 +1,18 @@
 <h3 mat-subheader>Upload File</h3>
 <p>The file should be formatted as <b>coma separated value (.csv)</b> and uncode <b>UTF-8</b> if possible.</p>
 
-<ngx-dropzone (change)="onSelect($event)" accept=".csv">
-  <ngx-dropzone-label>
-    Drag & Drop File or Select File to Upload
-  </ngx-dropzone-label>
-</ngx-dropzone>
+<div *ngIf="!file else fileNameRemoveButton">
+  <ngx-dropzone (change)="onSelect($event)" accept=".csv">
+    <ngx-dropzone-label>
+      Drag & Drop File or Select File to Upload
+    </ngx-dropzone-label>
+  </ngx-dropzone>
 
-<p class="download-csv-example" *ngIf="!file else fileNameRemoveButton">
-  No sure how to configure your file?
-  <a href="/Example%20Bulk%20Badge%20Awards.csv" target="_blank">Download example .CSV</a>
-</p>
+  <p class="download-csv-example">
+    No sure how to configure your file?
+    <a href="/Example%20Bulk%20Badge%20Awards.csv" target="_blank">Download example .CSV</a>
+  </p>
+</div>
 
 <ng-template #fileNameRemoveButton>
   <span class="remove-file">
