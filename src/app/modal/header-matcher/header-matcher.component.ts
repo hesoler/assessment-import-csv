@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core'
 import { NgForOf } from '@angular/common'
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { MatFormField } from '@angular/material/form-field'
+import { MatOption, MatSelect } from '@angular/material/select'
 
 @Component({
   selector: 'app-header-matcher',
@@ -8,7 +10,10 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
     NgForOf,
     FormsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatFormField,
+    MatSelect,
+    MatOption
   ],
   templateUrl: './header-matcher.component.html',
   styleUrl: './header-matcher.component.css'
@@ -23,16 +28,26 @@ export class HeaderMatcherComponent {
   @Output() validSelect = new EventEmitter<boolean>()
 
   checkValidSelects () {
-    const allValid = Object.values(this.formGroup.value).every(value => value !== '-1')
+    const allValid = Object.values(this.formGroup.value).every(value => value && value !== '-1')
     this.validSelect.emit(allValid)
   }
 
-  ngOnInit () {
-    this.headers.forEach((header, index) => {
+  initializeForm () {
+    this.headers.forEach((_, index) => {
       this.formGroup.addControl(`select${index}`, this.formBuilder.control('-1', Validators.required))
     })
     this.formGroup.valueChanges.subscribe(() => {
       this.checkValidSelects()
     })
+  }
+
+  ngOnChanges (changes: SimpleChanges) {
+    if (changes['headers']) {
+      this.initializeForm()
+    }
+  }
+
+  ngOnInit () {
+    this.initializeForm()
   }
 }
