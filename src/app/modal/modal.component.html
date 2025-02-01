@@ -10,50 +10,47 @@
   <mat-horizontal-stepper linear #stepper>
 
     <mat-step [stepControl]="firstFormGroup" label="Upload File" [completed]="isFileUploaded">
-      <form [formGroup]="firstFormGroup">
-        <app-dropzone-table (csvData)="handleCSVData($event)"/>
-        <footer class="footer-buttons">
-          <button mat-button matStepperNext [disabled]="!isFileUploaded">Next</button>
-        </footer>
-      </form>
+      <app-dropzone-table (csvData)="handleCSVData($event)"
+                          [formBuilder]="formBuilder"
+                          [formGroup]="firstFormGroup"/>
+      <footer class="footer-buttons">
+        <button mat-button matStepperNext [disabled]="!isFileUploaded">Next</button>
+      </footer>
     </mat-step>
 
     <mat-step [stepControl]="secondFormGroup" label="Field Mapping" [completed]="allSelectsValid">
-      <form class="second-form" [formGroup]="secondFormGroup">
-        <div *ngIf="headers.length > 0">
-          <app-header-matcher [headers]="headers"
-                              [ourColumnHeaders]="ourColumnHeaders"
-                              (validSelect)="handleValidSelects($event)"
-                              [formBuilder]="formBuilder"
-                              [formGroup]="secondFormGroup"
-          />
-        </div>
+      <div *ngIf="headers.length > 0">
+        <app-header-matcher [headers]="headers"
+                            [ourColumnHeaders]="ourColumnHeaders"
+                            (validSelect)="handleValidSelects($event)"
+                            [formBuilder]="formBuilder"
+                            [formGroup]="secondFormGroup"/>
+      </div>
 
-        <footer class="footer-buttons">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext [disabled]="!allSelectsValid">Next</button>
-        </footer>
-      </form>
+      <footer class="footer-buttons">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext [disabled]="!allSelectsValid">Next</button>
+      </footer>
     </mat-step>
 
     <mat-step [stepControl]="thirdFormGroup" label="Validation">
       <form [formGroup]="thirdFormGroup">
         <h3 mat-subheader>Validation</h3>
-        <div>
+        <footer class="footer-buttons">
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="onSave()">Next</button>
-        </div>
+          <button mat-button>Next</button>
+        </footer>
       </form>
     </mat-step>
 
     <mat-step [stepControl]="fourthFormGroup" label="Summary">
       <form [formGroup]="fourthFormGroup">
         <h3 mat-subheader>Summary</h3>
-        <div mat-dialog-actions>
+        <footer class="footer-buttons" mat-dialog-actions>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="resetStepper()">Reset</button>
           <button mat-button (click)="onSave()">Ready to send</button>
-        </div>
+        </footer>
       </form>
     </mat-step>
 

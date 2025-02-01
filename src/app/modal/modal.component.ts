@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject, ViewChild } from '@angular/core'
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatButtonModule, MatIconButton } from '@angular/material/button'
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog'
 import { MatIcon, MatIconModule } from '@angular/material/icon'
@@ -66,18 +66,14 @@ export class ModalComponent {
   }
 
   resetStepper () {
-    this.stepper.reset()
     this.resetSecondFormGroup()
     this.resetThirdFormGroup()
     this.resetFourthFormGroup()
+    this.stepper.reset()
   }
 
   resetSecondFormGroup () {
     this.secondFormGroup.reset()
-    this.secondFormGroup = this.formBuilder.group({})
-    this.headers.forEach((_, index) => {
-      this.secondFormGroup.addControl(`select${index}`, this.formBuilder.control('-1', Validators.required))
-    })
     this.allSelectsValid = false
   }
 

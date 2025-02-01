@@ -1,41 +1,44 @@
-<h3 mat-subheader>Upload File</h3>
-<p>The file should be formatted as <b>coma separated value (.csv)</b> and uncode <b>UTF-8</b> if possible.</p>
+<form [formGroup]="formGroup">
+  <h3 mat-subheader>Upload File</h3>
+  <p>The file should be formatted as <b>coma separated value (.csv)</b> and uncode <b>UTF-8</b> if possible.</p>
 
-<div *ngIf="!file else fileNameRemoveButton">
-  <ngx-dropzone (change)="onSelect($event)" accept=".csv">
-    <ngx-dropzone-label>
-      Drag & Drop File or Select File to Upload
-    </ngx-dropzone-label>
-  </ngx-dropzone>
+  <input type="hidden" formControlName="fileUploadedCtrl" [value]="fileUploadedCtrl">
+  <div *ngIf="!file else fileNameRemoveButton">
+    <ngx-dropzone (change)="onSelect($event)" accept=".csv">
+      <ngx-dropzone-label>
+        Drag & Drop File or Select File to Upload
+      </ngx-dropzone-label>
+    </ngx-dropzone>
 
-  <p class="download-csv-example">
-    No sure how to configure your file?
-    <a href="/Example%20Bulk%20Badge%20Awards.csv" target="_blank">Download example .CSV</a>
-  </p>
-</div>
+    <p class="download-csv-example">
+      No sure how to configure your file?
+      <a href="/Example%20Bulk%20Badge%20Awards.csv" target="_blank">Download example .CSV</a>
+    </p>
+  </div>
 
-<ng-template #fileNameRemoveButton>
+  <ng-template #fileNameRemoveButton>
   <span class="remove-file">
     <p>Uploaded file: {{ file?.name }}</p>
     <button type="button" (click)="onRemove()" [disabled]="isButtonDisabled">Remove file</button>
   </span>
-</ng-template>
+  </ng-template>
 
-<div *ngIf="errorMessage" class="error-message">
-  {{ errorMessage }}
-</div>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
 
-<div *ngIf="data.length > 0">
-  <h3 mat-subheader>File preview</h3>
-  <p>If something looks wrong, check your file or pasted data. Files should be exported as "coma-separated-values (CSV)"
-    using "UTF-8" encoding (if available). Manually input data should be comma tab separated.</p>
-  <hr/>
-  <table class="modal-table">
-    <tbody>
-    <tr *ngFor="let row of data">
-      <td *ngFor="let cell of row">{{ cell }}</td>
-    </tr>
-    </tbody>
-  </table>
-  <p>{{ resultMessage }}</p>
-</div>
+  <div *ngIf="data.length > 0">
+    <h3 mat-subheader>File preview</h3>
+    <p>If something looks wrong, check your file or pasted data. Files should be exported as "coma-separated-values
+      (CSV)" using "UTF-8" encoding (if available). Manually input data should be comma tab separated.</p>
+    <hr/>
+    <table class="modal-table">
+      <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let cell of row">{{ cell }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <p>{{ resultMessage }}</p>
+  </div>
+</form>

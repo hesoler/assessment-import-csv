@@ -32,22 +32,25 @@ export class HeaderMatcherComponent {
     this.validSelect.emit(allValid)
   }
 
-  initializeForm () {
-    this.headers.forEach((_, index) => {
+  assignControls () {
+    this.ourColumnHeaders.forEach((_, index) => {
       this.formGroup.addControl(`select${index}`, this.formBuilder.control('-1', Validators.required))
-    })
-    this.formGroup.valueChanges.subscribe(() => {
-      this.checkValidSelects()
     })
   }
 
   ngOnChanges (changes: SimpleChanges) {
     if (changes['headers']) {
-      this.initializeForm()
+      this.ourColumnHeaders.forEach((_, index) => {
+        this.formGroup.get(`select${index}`)?.setValue('-1')
+      })
+      this.assignControls()
     }
   }
 
   ngOnInit () {
-    this.initializeForm()
+    this.assignControls()
+    this.formGroup.valueChanges.subscribe(() => {
+      this.checkValidSelects()
+    })
   }
 }
