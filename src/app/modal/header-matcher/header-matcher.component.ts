@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core'
-import { NgForOf } from '@angular/common'
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core'
+import { NgForOf, NgIf } from '@angular/common'
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { MatFormField } from '@angular/material/form-field'
 import { MatOption, MatSelect } from '@angular/material/select'
@@ -13,12 +13,13 @@ import { MatOption, MatSelect } from '@angular/material/select'
     FormsModule,
     MatFormField,
     MatSelect,
-    MatOption
+    MatOption,
+    NgIf
   ],
   templateUrl: './header-matcher.component.html',
   styleUrl: './header-matcher.component.css'
 })
-export class HeaderMatcherComponent {
+export class HeaderMatcherComponent implements OnInit, OnChanges {
   @Input() headers!: string[]
   @Input() ourColumnHeaders!: string[]
 

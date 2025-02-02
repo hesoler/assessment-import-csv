@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { NgxDropzoneModule } from 'ngx-dropzone'
 import { NgForOf, NgIf } from '@angular/common'
 import * as Papa from 'papaparse'
@@ -21,7 +21,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   ],
   styleUrls: ['./dropzone-table.component.css']
 })
-export class DropzoneTableComponent {
+export class DropzoneTableComponent implements OnInit {
   protected file: File | null = null
   isButtonDisabled = true
   data: never[] = []

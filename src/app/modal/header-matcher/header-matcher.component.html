@@ -1,27 +1,29 @@
-<form [formGroup]="formGroup">
-  <label>
-    <input type="checkbox">
-    First row has headers
-  </label>
-  <table class="modal-table field-mapping-headers">
-    <thead>
-    <tr>
-      <th>YOUR COLUMNS</th>
-      <th>OUR COLUMN HEADERS</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let ourHeader of ourColumnHeaders; let i = index">
-      <td>
-        <mat-form-field appearance="fill" class="csv-headers">
-          <mat-select [formControlName]="'select' + i">
-            <mat-option value="-1" disabled>Select Column...</mat-option>
-            <mat-option class="csv-header" *ngFor="let header of headers" [value]="header">{{ header }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-      <td>{{ ourHeader }}</td>
-    </tr>
-    </tbody>
-  </table>
-</form>
+<div *ngIf="headers.length > 0">
+  <form [formGroup]="formGroup">
+    <label>
+      <input type="checkbox">
+      First row has headers
+    </label>
+    <table class="modal-table field-mapping-headers">
+      <thead>
+      <tr>
+        <th>YOUR COLUMNS</th>
+        <th>OUR COLUMN HEADERS</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ourHeader of ourColumnHeaders; let i = index">
+        <td>
+          <mat-form-field appearance="fill" class="csv-headers">
+            <mat-select [formControlName]="'select' + i">
+              <mat-option value="-1" disabled>Select Column...</mat-option>
+              <mat-option class="csv-header" *ngFor="let header of headers" [value]="header">{{ header }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>{{ ourHeader }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
