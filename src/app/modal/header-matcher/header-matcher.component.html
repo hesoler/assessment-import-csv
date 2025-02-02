@@ -14,12 +14,10 @@
       <tbody>
       <tr *ngFor="let ourHeader of ourColumnHeaders; let i = index">
         <td>
-          <mat-form-field appearance="fill" class="csv-headers">
-            <mat-select [formControlName]="'select' + i">
-              <mat-option value="-1" disabled>Select Column...</mat-option>
-              <mat-option class="csv-header" *ngFor="let header of headers" [value]="header">{{ header }}</mat-option>
-            </mat-select>
-          </mat-form-field>
+          <select [formControlName]="'select' + i" class="csv-headers custom-mat-select">
+            <option class="custom-mat-option" value="-1" disabled>Select Column...</option>
+            <option class="custom-mat-option" *ngFor="let header of headers" [value]="header">{{ header }}</option>
+          </select>
         </td>
         <td>{{ ourHeader }}</td>
       </tr>

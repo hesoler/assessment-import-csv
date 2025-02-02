@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core'
 import { NgForOf, NgIf } from '@angular/common'
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { MatFormField } from '@angular/material/form-field'
-import { MatOption, MatSelect } from '@angular/material/select'
 
 @Component({
   selector: 'app-header-matcher',
@@ -11,9 +9,6 @@ import { MatOption, MatSelect } from '@angular/material/select'
     FormsModule,
     ReactiveFormsModule,
     FormsModule,
-    MatFormField,
-    MatSelect,
-    MatOption,
     NgIf
   ],
   templateUrl: './header-matcher.component.html',

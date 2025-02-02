@@ -1,3 +1,14 @@
+form {
+  margin-top: 25px;
+}
+
+.field-mapping-headers {
+  margin-top: 20px;
+}
+
 .csv-headers {
   width: 100%;
+  height: 2rem;
+  border: 2px solid #ddd;
+  background-color: #ffffff;
 }
