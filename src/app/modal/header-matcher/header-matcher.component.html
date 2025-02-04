@@ -1,7 +1,7 @@
 <div *ngIf="headers.length > 0">
   <form [formGroup]="formGroup">
     <label>
-      <input type="checkbox">
+      <input type="checkbox" (change)="handleHasHeadersChecked($event)">
       First row has headers
     </label>
     <table class="modal-table field-mapping-headers">
@@ -14,7 +14,7 @@
       <tbody>
       <tr *ngFor="let ourHeader of ourColumnHeaders; let i = index">
         <td>
-          <select [formControlName]="'select' + i" class="csv-headers custom-mat-select">
+          <select [formControlName]="'select' + i" class="csv-headers custom-mat-select" (change)="checkValidSelects()">
             <option class="custom-mat-option" value="-1" disabled>Select Column...</option>
             <option class="custom-mat-option" *ngFor="let header of headers" [value]="header">{{ header }}</option>
           </select>

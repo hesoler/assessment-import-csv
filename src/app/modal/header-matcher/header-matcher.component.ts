@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core'
 import { NgForOf, NgIf } from '@angular/common'
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { FieldMapping, OurColumnsMapping } from '../types'
+import { getArrayEnumValues, getEnumKeyByValue } from '../utils'
+
+const ourColumnHeaders = getArrayEnumValues(OurColumnsMapping)
 
 @Component({
   selector: 'app-header-matcher',
@@ -16,37 +20,58 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class HeaderMatcherComponent implements OnInit, OnChanges {
   @Input() headers!: string[]
-  @Input() ourColumnHeaders!: string[]
-
   @Input() formBuilder!: FormBuilder
   @Input() formGroup!: FormGroup
 
-  @Output() validSelect = new EventEmitter<boolean>()
+  @Output() isAllSelectsValid = new EventEmitter<boolean>()
+  @Output() hasHeadersChecked = new EventEmitter<boolean>()
+
+  fieldMapping: FieldMapping = {}
 
   checkValidSelects () {
-    const allValid = Object.values(this.formGroup.value).every(value => value && value !== '-1')
-    this.validSelect.emit(allValid)
+    const allSelectsValid = Object.values(this.formGroup.value).every(value => value !== '-1')
+    this.isAllSelectsValid.emit(allSelectsValid)
   }
 
-  assignControls () {
-    this.ourColumnHeaders.forEach((_, index) => {
+  assignFormControls () {
+    ourColumnHeaders.forEach((_, index) => {
       this.formGroup.addControl(`select${index}`, this.formBuilder.control('-1', Validators.required))
     })
   }
 
+  handleHasHeadersChecked (event: any) {
+    this.hasHeadersChecked.emit(event.target.checked)
+  }
+
+  saveFieldMapping () {
+    ourColumnHeaders.forEach((ourHeader, index) => {
+      const csvFieldProp = getEnumKeyByValue(OurColumnsMapping, ourHeader)
+      if (!csvFieldProp) return
+
+      const selectedValue = this.formGroup.get(`select${index}`)?.value
+      this.fieldMapping[csvFieldProp] = this.headers.indexOf(selectedValue)
+    })
+  }
+
+  resetForm () {
+    this.headers.forEach((_, index) => {
+      this.formGroup.get(`select${index}`)?.setValue('-1')
+    })
+    this.isAllSelectsValid.emit(false)
+  }
+
   ngOnChanges (changes: SimpleChanges) {
     if (changes['headers']) {
-      this.ourColumnHeaders.forEach((_, index) => {
+      ourColumnHeaders.forEach((_, index) => {
         this.formGroup.get(`select${index}`)?.setValue('-1')
       })
-      this.assignControls()
+      this.assignFormControls()
     }
   }
 
   ngOnInit () {
-    this.assignControls()
-    this.formGroup.valueChanges.subscribe(() => {
-      this.checkValidSelects()
-    })
+    this.assignFormControls()
   }
+
+  protected readonly ourColumnHeaders = ourColumnHeaders
 }

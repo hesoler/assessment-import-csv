@@ -1,0 +1,9 @@
+.validation-message {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+.validation-message p {
+  text-indent: 18px;
+}

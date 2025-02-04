@@ -1,0 +1,13 @@
+<div *ngIf="headers.length > 0 else noRowsTemplate">
+  <div *ngFor="let message of validationMessageList">
+    <div class="validation-message">
+      <p>{{ message }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #noRowsTemplate>
+  <div class="validation-message">
+    <p>{{ CheckResult.Invalid }} no rows found</p>
+  </div>
+</ng-template>

@@ -9,6 +9,8 @@ import { MatListSubheaderCssMatStyler } from '@angular/material/list'
 import { DropzoneTableComponent } from './dropzone-table/dropzone-table.component'
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 import { HeaderMatcherComponent } from './header-matcher/header-matcher.component'
+import { HeaderValidatorComponent } from './header-validator/header-validator.component'
+import { CSVFields } from './types'
 
 @Component({
   selector: 'app-modal',
@@ -24,7 +26,8 @@ import { HeaderMatcherComponent } from './header-matcher/header-matcher.componen
     CommonModule,
     MatListSubheaderCssMatStyler,
     DropzoneTableComponent,
-    HeaderMatcherComponent
+    HeaderMatcherComponent,
+    HeaderValidatorComponent
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
@@ -39,9 +42,14 @@ export class ModalComponent {
   isFileUploaded = false
   csvData: any[] = []
   headers: string[] = []
-  ourColumnHeaders = ['Identifier', 'First Name', 'Last Name', 'Narrative', 'Evidence Narrative', 'Evidence URL', 'Issue Date', 'Expiration Date']
-  allSelectsValid = false
+  isAllSelectsValid = false
+  hasHeadersChecked = false
+  isValidData = false
+  finalJSON: CSVFields[] = []
+
   @ViewChild('stepper') stepper!: MatStepper
+  @ViewChild(HeaderMatcherComponent) headerMatcherComponent!: HeaderMatcherComponent
+  @ViewChild(HeaderValidatorComponent) headerValidatorComponent!: HeaderValidatorComponent
 
   protected readonly formBuilder = inject(FormBuilder)
 
@@ -62,7 +70,23 @@ export class ModalComponent {
   }
 
   handleValidSelects (valid: boolean) {
-    this.allSelectsValid = valid
+    this.isAllSelectsValid = valid
+  }
+
+  handleHasHeadersChecked (hasHeaderChecked: boolean) {
+    this.hasHeadersChecked = hasHeaderChecked
+  }
+
+  prepareValidationFields () {
+    this.headerMatcherComponent.saveFieldMapping()
+    const fieldMapping = this.headerMatcherComponent.fieldMapping
+    const csvData = this.csvData
+    const hasHeadersChecked = this.hasHeadersChecked
+    this.headerValidatorComponent.prepareCSVDataToValidate({ fieldMapping, csvData, hasHeadersChecked })
+  }
+
+  handleValidData (isValidData: boolean) {
+    this.isValidData = isValidData
   }
 
   resetStepper () {
@@ -73,8 +97,7 @@ export class ModalComponent {
   }
 
   resetSecondFormGroup () {
-    this.secondFormGroup.reset()
-    this.allSelectsValid = false
+    this.headerMatcherComponent.resetForm()
   }
 
   resetThirdFormGroup () {

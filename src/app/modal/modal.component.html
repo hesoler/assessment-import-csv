@@ -18,29 +18,28 @@
       </footer>
     </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup" label="Field Mapping" [completed]="allSelectsValid">
-      <div *ngIf="headers.length > 0">
-        <app-header-matcher [headers]="headers"
-                            [ourColumnHeaders]="ourColumnHeaders"
-                            (validSelect)="handleValidSelects($event)"
-                            [formBuilder]="formBuilder"
-                            [formGroup]="secondFormGroup"/>
-      </div>
+    <mat-step [stepControl]="secondFormGroup" label="Field Mapping" [completed]="isAllSelectsValid">
+      <app-header-matcher [headers]="headers"
+                          (isAllSelectsValid)="handleValidSelects($event)"
+                          [formBuilder]="formBuilder"
+                          [formGroup]="secondFormGroup"
+                          (hasHeadersChecked)="handleHasHeadersChecked($event)"/>
 
       <footer class="footer-buttons">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext [disabled]="!allSelectsValid">Next</button>
+        <button mat-button matStepperPrevious (click)="resetSecondFormGroup()">Back</button>
+        <button mat-button matStepperNext [disabled]="!isAllSelectsValid" (click)="prepareValidationFields()">Next</button>
       </footer>
     </mat-step>
 
-    <mat-step [stepControl]="thirdFormGroup" label="Validation">
-      <form [formGroup]="thirdFormGroup">
-        <h3 mat-subheader>Validation</h3>
-        <footer class="footer-buttons">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button>Next</button>
-        </footer>
-      </form>
+    <mat-step [stepControl]="thirdFormGroup" label="Validation" [completed]="isValidData">
+      <app-header-validator [headers]="headers"
+                            [formBuilder]="formBuilder"
+                            [formGroup]="thirdFormGroup"
+                            (isValidData)="handleValidData($event)"/>
+      <footer class="footer-buttons">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button [disabled]="!isValidData">Next</button>
+      </footer>
     </mat-step>
 
     <mat-step [stepControl]="fourthFormGroup" label="Summary">
