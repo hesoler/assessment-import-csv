@@ -5,12 +5,12 @@ import { MatButtonModule, MatIconButton } from '@angular/material/button'
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog'
 import { MatIcon, MatIconModule } from '@angular/material/icon'
 import { MatStepper, MatStepperModule } from '@angular/material/stepper'
-import { MatListSubheaderCssMatStyler } from '@angular/material/list'
 import { DropzoneTableComponent } from './dropzone-table/dropzone-table.component'
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 import { HeaderMatcherComponent } from './header-matcher/header-matcher.component'
 import { HeaderValidatorComponent } from './header-validator/header-validator.component'
 import { CSVFields } from './types'
+import { JsonTableComponent } from './json-table/json-table.component'
 
 @Component({
   selector: 'app-modal',
@@ -24,10 +24,10 @@ import { CSVFields } from './types'
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    MatListSubheaderCssMatStyler,
     DropzoneTableComponent,
     HeaderMatcherComponent,
-    HeaderValidatorComponent
+    HeaderValidatorComponent,
+    JsonTableComponent
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
@@ -45,11 +45,13 @@ export class ModalComponent {
   isAllSelectsValid = false
   hasHeadersChecked = false
   isValidData = false
-  finalJSON: CSVFields[] = []
+  exportData: CSVFields[] = []
+  isValidExportData = false
 
   @ViewChild('stepper') stepper!: MatStepper
   @ViewChild(HeaderMatcherComponent) headerMatcherComponent!: HeaderMatcherComponent
   @ViewChild(HeaderValidatorComponent) headerValidatorComponent!: HeaderValidatorComponent
+  @ViewChild(JsonTableComponent) jsonTableComponent!: JsonTableComponent
 
   protected readonly formBuilder = inject(FormBuilder)
 
@@ -85,8 +87,20 @@ export class ModalComponent {
     this.headerValidatorComponent.prepareCSVDataToValidate({ fieldMapping, csvData, hasHeadersChecked })
   }
 
-  handleValidData (isValidData: boolean) {
+  handleIsValidData (isValidData: boolean) {
     this.isValidData = isValidData
+  }
+
+  handleExportData (exportData: CSVFields[]) {
+    this.exportData = exportData
+  }
+
+  prepareExportData () {
+    this.jsonTableComponent.prepareJSONFromCSVData(this.exportData)
+  }
+
+  handleIsValidExportData (isValidExportData: boolean) {
+    this.isValidExportData = isValidExportData
   }
 
   resetStepper () {
@@ -109,6 +123,9 @@ export class ModalComponent {
   }
 
   onSave (): void {
-    this.dialogRef.close(true)
+    if (this.isValidExportData) {
+      this.dialogRef.close(true)
+      alert('Data sent successfully!.')
+    }
   }
 }

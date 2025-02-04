@@ -13,6 +13,7 @@
       <app-dropzone-table (csvData)="handleCSVData($event)"
                           [formBuilder]="formBuilder"
                           [formGroup]="firstFormGroup"/>
+
       <footer class="footer-buttons">
         <button mat-button matStepperNext [disabled]="!isFileUploaded">Next</button>
       </footer>
@@ -35,22 +36,25 @@
       <app-header-validator [headers]="headers"
                             [formBuilder]="formBuilder"
                             [formGroup]="thirdFormGroup"
-                            (isValidData)="handleValidData($event)"/>
+                            (isValidData)="handleIsValidData($event)"
+                            (exportData)="handleExportData($event)"/>
+
       <footer class="footer-buttons">
         <button mat-button matStepperPrevious (click)="resetThirdFormGroup()">Back</button>
-        <button mat-button matStepperNext [disabled]="!isValidData">Next</button>
+        <button mat-button matStepperNext [disabled]="!isValidData" (click)="prepareExportData()">Next</button>
       </footer>
     </mat-step>
 
-    <mat-step [stepControl]="fourthFormGroup" label="Summary">
-      <form [formGroup]="fourthFormGroup">
-        <h3 mat-subheader>Summary</h3>
-        <footer class="footer-buttons" mat-dialog-actions>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="resetStepper()">Reset</button>
-          <button mat-button (click)="onSave()">Ready to send</button>
-        </footer>
-      </form>
+    <mat-step [stepControl]="fourthFormGroup" label="Summary" [completed]="isValidExportData">
+      <app-json-table [formBuilder]="formBuilder"
+                      [formGroup]="fourthFormGroup"
+                      (isValidExport)="handleIsValidExportData($event)"/>
+
+      <footer class="footer-buttons" mat-dialog-actions>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="resetStepper()">Reset</button>
+        <button mat-button (click)="onSave()">Ready to send</button>
+      </footer>
     </mat-step>
 
   </mat-horizontal-stepper>

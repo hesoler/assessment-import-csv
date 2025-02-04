@@ -7,6 +7,10 @@ export function getArrayEnumValues (enumObj: any): string[] {
   return Object.values(enumObj)
 }
 
+export function getArrayEnumKeys (enumObj: any): string[] {
+  return Object.keys(enumObj)
+}
+
 /** params @date - date value with 'yyyy-MM-dd' format */
 export function isValidDate (date: string): boolean {
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/

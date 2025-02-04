@@ -1,0 +1,25 @@
+<form [formGroup]="formGroup">
+  <div *ngIf="countRowsToBeImported > 0">
+    <p>{{ countRowsToBeImported }} rows are ready to be imported.</p>
+
+    <table class="modal-table">
+      <thead>
+      <tr>
+        <th *ngFor="let header of jsonTableHeaders">{{ header }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of jsonTableData">
+        <td>{{ row.name }}</td>
+        <td>{{ row.id }}</td>
+        <td>{{ row.evidenceUrl }}</td>
+        <td>{{ row.issueDate }}</td>
+        <td>{{ row.expirationDate }}</td>
+        <td>{{ row.narrative }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <input type="hidden" formControlName="isValidExportCtrl" [value]="isValidExportCtrl">
+</form>
+

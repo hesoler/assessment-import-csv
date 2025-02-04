@@ -28,10 +28,11 @@ export class HeaderValidatorComponent implements OnInit {
   @Input() headers!: string[]
   @Input() formBuilder!: FormBuilder
   @Input() formGroup!: FormGroup
+  isValidDataCtrl = false
 
   validationMessageList: string[] = []
   @Output() isValidData = new EventEmitter<boolean>()
-  isValidDataCtrl = false
+  @Output() exportData = new EventEmitter<CSVFields[]>()
 
   prepareCSVDataToValidate ({ fieldMapping, csvData, hasHeadersChecked }: PrepareFields) {
     this.validationMessageList = []
@@ -121,6 +122,7 @@ export class HeaderValidatorComponent implements OnInit {
 
     if (validRows === dataToValidate.length) {
       this.validationMessageList.push(`${CheckResult.Valid} All rows are valid and will be imported.`)
+      this.exportData.emit(dataToValidate)
     }
     this.validationMessageList.push(`${CheckResult.Valid} ${validRows} valid rows were found in your file`)
   }
@@ -130,6 +132,7 @@ export class HeaderValidatorComponent implements OnInit {
     this.validationMessageList = []
     this.isValidDataCtrl = false
     this.isValidData.emit(false)
+    this.exportData.emit([])
   }
 
   ngOnInit () {

@@ -29,9 +29,9 @@ export enum OurColumnsMapping {
 
 export enum JSONTable {
   name = 'NAME',
-  narrative = 'NARRATIVE',
-  evidenceNarrative = 'EVIDENCE NARRATIVE',
-  evidenceUrl = 'EVIDENCE Url',
+  id = 'IDENTIFIER',
+  evidenceUrl = 'EVIDENCE URL',
   issueDate = 'ISSUE DATE',
   expirationDate = 'EXPIRATION DATE',
+  narrative = 'NARRATIVE'
 }
