@@ -37,8 +37,8 @@
                             [formGroup]="thirdFormGroup"
                             (isValidData)="handleValidData($event)"/>
       <footer class="footer-buttons">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button [disabled]="!isValidData">Next</button>
+        <button mat-button matStepperPrevious (click)="resetThirdFormGroup()">Back</button>
+        <button mat-button matStepperNext [disabled]="!isValidData">Next</button>
       </footer>
     </mat-step>
 

@@ -1,13 +1,17 @@
-<div *ngIf="headers.length > 0 else noRowsTemplate">
-  <div *ngFor="let message of validationMessageList">
-    <div class="validation-message">
-      <p>{{ message }}</p>
+<form [formGroup]="formGroup">
+  <div *ngIf="headers.length > 0 else noRowsTemplate">
+    <div *ngFor="let message of validationMessageList">
+      <div class="validation-message">
+        <p>{{ message }}</p>
+      </div>
     </div>
   </div>
-</div>
 
-<ng-template #noRowsTemplate>
-  <div class="validation-message">
-    <p>{{ CheckResult.Invalid }} no rows found</p>
-  </div>
-</ng-template>
+  <ng-template #noRowsTemplate>
+    <div class="validation-message">
+      <p>{{ CheckResult.Invalid }} no rows found</p>
+    </div>
+  </ng-template>
+
+  <input type="hidden" formControlName="isValidDataCtrl" [value]="isValidDataCtrl">
+</form>

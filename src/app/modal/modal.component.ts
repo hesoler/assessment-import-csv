@@ -101,7 +101,7 @@ export class ModalComponent {
   }
 
   resetThirdFormGroup () {
-    this.thirdFormGroup.reset()
+    this.headerValidatorComponent.resetForm()
   }
 
   resetFourthFormGroup () {
