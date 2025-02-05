@@ -49,7 +49,7 @@ export class HeaderMatcherComponent implements OnInit, OnChanges {
       if (!csvFieldProp) return
 
       const selectedValue = this.formGroup.get(`select${index}`)?.value
-      this.fieldMapping[csvFieldProp] = this.headers.indexOf(selectedValue)
+      this.fieldMapping[csvFieldProp] = selectedValue;
     })
   }
 
