@@ -53,7 +53,7 @@
       <footer class="footer-buttons" mat-dialog-actions>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="resetStepper()">Reset</button>
-        <button mat-button (click)="onSave()">Ready to send</button>
+        <button mat-button (click)="onSave()" [disabled]="!isValidExportData">Ready to send</button>
       </footer>
     </mat-step>
 
