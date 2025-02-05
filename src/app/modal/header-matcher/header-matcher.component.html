@@ -16,7 +16,7 @@
         <td>
           <select [formControlName]="'select' + i" class="csv-headers custom-mat-select" (change)="checkValidSelects()">
             <option class="custom-mat-option" value="-1" disabled>Select Column...</option>
-            <option class="custom-mat-option" *ngFor="let header of headers" [value]="header">{{ header }}</option>
+            <option class="custom-mat-option" *ngFor="let header of headers" [value]="i">{{ header }}</option>
           </select>
         </td>
         <td>{{ ourHeader }}</td>
