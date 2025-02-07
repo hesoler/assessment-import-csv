@@ -29,13 +29,13 @@ export class HeaderMatcherComponent implements OnInit, OnChanges {
   fieldMapping: FieldMapping = {}
 
   checkValidSelects () {
-    const allSelectsValid = Object.values(this.formGroup.value).every(value => value !== '-1')
+    const allSelectsValid = Object.values(this.formGroup.value).every(value => value !== '')
     this.isAllSelectsValid.emit(allSelectsValid)
   }
 
   assignFormControls () {
     ourColumnHeaders.forEach((_, index) => {
-      this.formGroup.addControl(`select${index}`, this.formBuilder.control('-1', Validators.required))
+      this.formGroup.addControl(`select${index}`, this.formBuilder.control('', Validators.required))
     })
   }
 
@@ -56,7 +56,7 @@ export class HeaderMatcherComponent implements OnInit, OnChanges {
     this.headers.forEach((_, index) => {
       this.formGroup.get(`select${index}`)?.setValue('-1')
     })
-    this.isAllSelectsValid.emit(false)
+    this.isAllSelectsValid.emit(true)
   }
 
   ngOnChanges (changes: SimpleChanges) {

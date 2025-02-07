@@ -43,14 +43,14 @@ export class HeaderValidatorComponent implements OnInit {
 
     dataWithoutHeaders.forEach(data => {
       const csvFieldObject: CSVFields = {
-        id: data[fieldMapping['id']],
-        firstName: data[fieldMapping['firstName']],
-        lastName: data[fieldMapping['lastName']],
-        narrative: data[fieldMapping['narrative']],
-        evidenceNarrative: data[fieldMapping['evidenceNarrative']],
-        evidenceUrl: data[fieldMapping['evidenceUrl']],
-        issueDate: data[fieldMapping['issueDate']],
-        expirationDate: data[fieldMapping['expirationDate']]
+        id: data[fieldMapping['id']] || '',
+        firstName: data[fieldMapping['firstName']] || '',
+        lastName: data[fieldMapping['lastName']] || '',
+        narrative: data[fieldMapping['narrative']] || '',
+        evidenceNarrative: data[fieldMapping['evidenceNarrative']] || '',
+        evidenceUrl: data[fieldMapping['evidenceUrl']] || '',
+        issueDate: data[fieldMapping['issueDate']] || '',
+        expirationDate: data[fieldMapping['expirationDate'] || '']
       }
       dataToValidate.push(csvFieldObject)
     })
