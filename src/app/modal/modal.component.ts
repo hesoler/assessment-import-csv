@@ -49,6 +49,7 @@ export class ModalComponent {
   isValidExportData = false
 
   @ViewChild('stepper') stepper!: MatStepper
+  @ViewChild(DropzoneTableComponent) dropzoneTable!: DropzoneTableComponent
   @ViewChild(HeaderMatcherComponent) headerMatcherComponent!: HeaderMatcherComponent
   @ViewChild(HeaderValidatorComponent) headerValidatorComponent!: HeaderValidatorComponent
   @ViewChild(JsonTableComponent) jsonTableComponent!: JsonTableComponent
@@ -108,6 +109,10 @@ export class ModalComponent {
     this.resetThirdFormGroup()
     this.resetFourthFormGroup()
     this.stepper.reset()
+  }
+
+  removeCSV () {
+    this.dropzoneTable.onRemoveFile()
   }
 
   resetSecondFormGroup () {
