@@ -33,7 +33,7 @@ export class DropzoneTableComponent implements OnInit {
   @Input() formGroup!: FormGroup
   fileUploadedCtrl: 1 | null = null
 
-  onSelect (event: FileSelectResult) {
+  onSelectFile (event: FileSelectResult) {
     const selectedFile = event?.addedFiles[0]
     if (selectedFile?.type === 'text/csv') {
       this.file = selectedFile
@@ -41,13 +41,13 @@ export class DropzoneTableComponent implements OnInit {
       this.errorMessage = ''
       this.parseCSV(selectedFile)
     } else {
-      this.onRemove()
+      this.onRemoveFile()
       this.errorMessage = 'Only .csv files are allowed!'
       this.resultMessage = ''
     }
   }
 
-  onRemove () {
+  onRemoveFile () {
     this.file = null
     this.isButtonDisabled = true
     this.data = []

@@ -4,7 +4,7 @@
 
   <input type="hidden" formControlName="fileUploadedCtrl" [value]="fileUploadedCtrl">
   <div *ngIf="!file else fileNameRemoveButton">
-    <ngx-dropzone (change)="onSelect($event)" accept=".csv">
+    <ngx-dropzone (change)="onSelectFile($event)" accept=".csv">
       <ngx-dropzone-label>
         Drag & Drop File or Select File to Upload
       </ngx-dropzone-label>
@@ -19,7 +19,7 @@
   <ng-template #fileNameRemoveButton>
   <span class="remove-file">
     <p>Uploaded file: {{ file?.name }}</p>
-    <button type="button" (click)="onRemove()" [disabled]="isButtonDisabled">Remove file</button>
+    <button type="button" (click)="onRemoveFile()" [disabled]="isButtonDisabled">Remove file</button>
   </span>
   </ng-template>
 
