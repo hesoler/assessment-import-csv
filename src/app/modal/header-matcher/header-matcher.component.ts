@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core'
-import { NgForOf, NgIf } from '@angular/common'
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { FieldMapping, OurColumnsMapping } from '../types'
-import { getArrayEnumValues, getEnumKeyByValue } from '../utils'
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core'
+import {NgForOf, NgIf} from '@angular/common'
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms'
+import {FieldMapping, OurColumnsMapping} from '../types'
+import {getArrayEnumValues, getEnumKeyByValue} from '../utils'
 
 const ourColumnHeaders = getArrayEnumValues(OurColumnsMapping)
 
@@ -48,8 +48,7 @@ export class HeaderMatcherComponent implements OnInit, OnChanges {
       const csvFieldProp = getEnumKeyByValue(OurColumnsMapping, ourHeader)
       if (!csvFieldProp) return
 
-      const selectedValue = this.formGroup.get(`select${index}`)?.value
-      this.fieldMapping[csvFieldProp] = selectedValue;
+      this.fieldMapping[csvFieldProp] = this.formGroup.get(`select${index}`)?.value
     })
   }
 
