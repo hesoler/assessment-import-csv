@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core'
-import {NgForOf, NgIf} from '@angular/common'
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms'
-import {FieldMapping, OurColumnsMapping} from '../types'
-import {getArrayEnumValues, getEnumKeyByValue} from '../utils'
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core'
+import { NgForOf, NgIf } from '@angular/common'
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { FieldMapping, OurColumnsMapping } from '../types'
+import { getArrayEnumValues, getEnumKeyByValue } from '../utils'
 
 const ourColumnHeaders = getArrayEnumValues(OurColumnsMapping)
 

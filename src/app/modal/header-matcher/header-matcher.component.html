@@ -15,8 +15,8 @@
       <tr *ngFor="let ourHeader of ourColumnHeaders; let i = index">
         <td>
           <select [formControlName]="'select' + i" class="csv-headers custom-mat-select" (change)="checkValidSelects()">
-            <option class="custom-mat-option" value="-1" disabled>Select Column...</option>
-            <option class="custom-mat-option" *ngFor="let header of headers" [value]="i">{{ header }}</option>
+            <option class="custom-mat-option" value="-1" selected>Select Column...</option>
+            <option class="custom-mat-option" *ngFor="let header of headers; let j = index" [value]="j">{{ header }}</option>
           </select>
         </td>
         <td>{{ ourHeader }}</td>
