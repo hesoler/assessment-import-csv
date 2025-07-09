@@ -31,6 +31,7 @@ import { JsonTableComponent } from './json-table/json-table.component'
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
+  standalone: true,
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,

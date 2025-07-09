@@ -22,6 +22,7 @@ interface ValidateFields {
     ReactiveFormsModule
   ],
   templateUrl: './header-validator.component.html',
+  standalone: true,
   styleUrl: './header-validator.component.css'
 })
 export class HeaderValidatorComponent implements OnInit {

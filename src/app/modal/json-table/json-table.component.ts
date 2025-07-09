@@ -12,6 +12,7 @@ import { getArrayEnumValues } from '../utils'
     NgForOf
   ],
   templateUrl: './json-table.component.html',
+  standalone: true,
   styleUrl: './json-table.component.css'
 })
 export class JsonTableComponent implements OnInit {

@@ -19,6 +19,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
     FormsModule,
     ReactiveFormsModule
   ],
+  standalone: true,
   styleUrls: ['./dropzone-table.component.css']
 })
 export class DropzoneTableComponent implements OnInit {

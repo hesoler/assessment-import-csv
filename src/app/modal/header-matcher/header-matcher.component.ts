@@ -16,6 +16,7 @@ const ourColumnHeaders = getArrayEnumValues(OurColumnsMapping)
     NgIf
   ],
   templateUrl: './header-matcher.component.html',
+  standalone: true,
   styleUrl: './header-matcher.component.css'
 })
 export class HeaderMatcherComponent implements OnInit, OnChanges {
